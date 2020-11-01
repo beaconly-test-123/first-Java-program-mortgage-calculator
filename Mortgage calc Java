@@ -1,0 +1,37 @@
+package com.noobclasses;
+
+import java.text.NumberFormat;
+import java.util.Scanner;
+
+public class Main {
+//Mortgage Calculator by using "Principal" "Annual interest rate" "Period (years)"
+    public static void main(String[] args) {
+        //define months in a year and percent
+        final byte monthsInAYear = 12;
+        final byte percent = 100;
+
+        //request info
+
+        //principal (p) + casting string to numeric value
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Principal: ");
+        String principal = scanner.nextLine();
+        double p = Double.parseDouble(principal);
+
+        //interest rate (r) + casting string to numeric value + translate input to formula required value
+        System.out.print("Annual Interest Rate: ");
+        String interestRate = scanner.nextLine();
+        double r = Double.parseDouble(interestRate) / monthsInAYear / percent;
+
+        //period (years)(n) + casting string to numeric value + translate input to formula required value
+        System.out.print("Period (Years): ");
+        String period = scanner.nextLine();
+        double n = Double.parseDouble(period) * monthsInAYear;
+
+        //define & display monthly mortgage payments (m)
+        double m = p * (r * Math.pow(1 + r,n)/(Math.pow(1+r,n)-1));
+        NumberFormat monthlyPayments = NumberFormat.getCurrencyInstance();
+        String payment = monthlyPayments.format(m);
+        System.out.print("Your Monthly Mortgage is: " + payment);
+    }
+}
